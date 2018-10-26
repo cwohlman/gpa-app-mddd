@@ -7,3 +7,19 @@ const gulp = require('gulp');
 gulp.task('start', function () {
 
 });
+
+function testDomain(done) {
+  Object.keys(require.cache).forEach(key => delete require.cache[key]);
+  try {
+    require('../domain/test')();
+    console.log('Success!');
+  } catch (error) {
+    console.log('Failure: ' + error.stack);
+  }
+  done && done();
+}
+
+gulp.task('test-domain', function () {
+  testDomain();
+  gulp.watch('../domain/**/*.js', testDomain);
+});
