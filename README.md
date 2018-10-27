@@ -26,3 +26,13 @@ Place commonly used tasks in package.json for easy running, use `./start` for de
 - create an imperative shell for each app (domain, client, server)
 - create a functional root for each app (functin createDomain(someargs) { ... })
 - build gpa-app using this approach
+
+# Next
+
+1. Switch to mocha for a test runner
+2. Continue using custom assertions
+3. Build a unified domain language, mocha tests import this domain language, or the domain tests are translated to mocha tests
+4. Switch to react for rendering the client
+5. Fix tool watch mode to be faster
+6. Fix tool watch mode to fully clean up after child processes
+7. 

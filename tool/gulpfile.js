@@ -20,7 +20,9 @@ function testDomain(done) {
   done && done();
 }
 
-gulp.task('test-domain', function () {
+gulp.task('test-domain', testDomain);
+
+gulp.task('watch-test-domain', function () {
   testDomain();
   const watcher = gulp.watch('../domain/**/*.js', testDomain);
 
@@ -33,7 +35,7 @@ gulp.task('test-domain', function () {
   });
 
   return watcher;
-});
+})
 
 function testViewDomain(done) {
   Object.keys(require.cache).forEach(key => delete require.cache[key]);
