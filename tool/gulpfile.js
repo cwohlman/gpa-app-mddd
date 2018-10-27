@@ -10,7 +10,7 @@ gulp.task('start', function () {
 });
 
 function testDomain(done) {
-  Object.keys(require.cache).forEach(key => delete require.cache[key]);
+  // Object.keys(require.cache).forEach(key => delete require.cache[key]);
   try {
     require('../domain/test')();
     console.log('Success!');
@@ -22,7 +22,17 @@ function testDomain(done) {
 
 gulp.task('test-domain', function () {
   testDomain();
-  gulp.watch('../domain/**/*.js', testDomain);
+  const watcher = gulp.watch('../domain/**/*.js', testDomain);
+
+  watcher.on('change', function(path, stats) {
+    delete require.cache[require.resolve(path)];
+  });
+  
+  watcher.on('unlink', function(path, stats) {
+    delete require.cache[require.resolve(path)];
+  });
+
+  return watcher;
 });
 
 function testViewDomain(done) {
