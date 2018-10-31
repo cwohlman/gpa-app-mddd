@@ -37,6 +37,14 @@ gulp.task('watch-test-domain', function () {
   return watcher;
 })
 
+gulp.task('typescript', function () {
+  var tsProject = ts.createProject("tsconfig.json");
+  return tsProject.src()
+    .pipe(tsProject())
+    .js.pipe(gulp.dest("dist"))
+    ;
+})
+
 function testViewDomain(done) {
   Object.keys(require.cache).forEach(key => delete require.cache[key]);
   try {

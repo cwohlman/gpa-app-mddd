@@ -35,4 +35,5 @@ Place commonly used tasks in package.json for easy running, use `./start` for de
 4. Switch to react for rendering the client
 5. Fix tool watch mode to be faster
 6. Fix tool watch mode to fully clean up after child processes
-7. 
+7. Integrate a type system
+8. Create a 'test-domain'
