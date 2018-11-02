@@ -1,6 +1,10 @@
 const ViewGrandkidsFeatureTest = require('./specifications/view-grandkids-feature-test');
-module.exports = function test() {
-  const makeDomain = require('./root');
+const makeDomain = require('./root');
 
-  ViewGrandkidsFeatureTest(makeDomain);
+module.exports = function test() {
+  // uncomment to see how insanely fast these tests are :)
+  // for (var i = 0; i < 100000; i++) {
+    ViewGrandkidsFeatureTest(makeDomain);
+  // }
+  console.log('Success!');
 }

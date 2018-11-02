@@ -21,6 +21,7 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
     ThenIShouldSeeAGrandkidWithName('Maria');
   });
 
+
   function GivenOneGrandkidHasBeenAdded() {
     domain.AddGrandkid({
       name: 'GivenOneGrandkidHasBeenAdded'
