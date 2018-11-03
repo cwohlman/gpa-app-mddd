@@ -52,10 +52,6 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
     ExpectToFindGrandkid(WithName(name), world.result);
   }
 
-  function ThenIShouldSeeOneGrandkid() {
-    ExpectNumberOfGrandkids(1, world.result);
-  }
-
   function ThenIShouldSeeTwoGrandkid() {
     ExpectNumberOfGrandkids(2, world.result);
   }

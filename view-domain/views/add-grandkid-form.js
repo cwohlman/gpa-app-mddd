@@ -1,14 +1,12 @@
-module.exports = function addGrandkidForm(args, domain) {
-  const grandkid = args[0];
-  return {
-    view: 'AddGrandkidForm',
-    inputName(name) {
-      domain.store('AddGrandkidForm', 'nameInput', name);
-    },
-    submitForm() {
-      const name = domain.get('AddGrandkidForm', 'nameInput');
+const View = require('../../models/view');
 
-      domain.core.AddGrandkid({ name });
-    }
-  };
+module.exports = class AddGrandkidForm extends View {
+  inputName(name) {
+    this.domain.store('AddGrandkidForm', 'nameInput', name);
+  }
+  submitForm() {
+    const name = this.domain.get('AddGrandkidForm', 'nameInput');
+
+    this.domain.coreDomain.AddGrandkid({ name });
+  }
 }

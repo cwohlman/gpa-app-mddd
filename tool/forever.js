@@ -19,6 +19,10 @@ const watcher = require('chokidar').watch([]).on('all', function (event, path) {
   }
 });
 
+global.watch = function (file) {
+  watcher.add(file);
+}
+
 const paths = [];
 let maps = {};
 let mapping = [];

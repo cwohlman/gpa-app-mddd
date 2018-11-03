@@ -1,3 +1,5 @@
+const GrandkidListItemView = require('../views/grandkid-list-item');
+
 module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   let domain;
   let world;
@@ -11,9 +13,9 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   });
 
   function GivenThereAreThreeGrandkids() {
-    domain.core.AddGrandkid({ name: 'One' });
-    domain.core.AddGrandkid({ name: 'Two' });
-    domain.core.AddGrandkid({ name: 'Three' });
+    domain.coreDomain.AddGrandkid({ name: 'One' });
+    domain.coreDomain.AddGrandkid({ name: 'Two' });
+    domain.coreDomain.AddGrandkid({ name: 'Three' });
   }
 
   function WhenTheListOfGrandkidsIsPresented() {
@@ -33,10 +35,7 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   }
 
   function GrandkidListItem(item) {
-    if (item.view !== 'GrandkidListItem') {
-      return false;
-    }
-    return true;
+    return item instanceof GrandkidListItemView;
   }
 
   GrandkidListItem.description = "Grandkid list items"

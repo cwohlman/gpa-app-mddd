@@ -1,3 +1,6 @@
+const ListOfGrandkidsView = require('../views/list-of-grandkids');
+const AddGrandkidFormView = require('../views/add-grandkid-form');
+
 module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   let domain;
   let world;
@@ -13,9 +16,9 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   });
 
   function GivenThereAreThreeGrandkids() {
-    domain.core.AddGrandkid({ name: 'One' });
-    domain.core.AddGrandkid({ name: 'Two' });
-    domain.core.AddGrandkid({ name: 'Three' });
+    domain.coreDomain.AddGrandkid({ name: 'One' });
+    domain.coreDomain.AddGrandkid({ name: 'Two' });
+    domain.coreDomain.AddGrandkid({ name: 'Three' });
   }
 
   function WhenTheDefaultViewIsPresented() {
@@ -46,13 +49,13 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
 }
 
 function ListOfGrandkids(item) {
-  return item.view === 'ListOfGrandkids';
+  return item instanceof ListOfGrandkidsView;
 }
 
 ListOfGrandkids.description = 'List of grandkids view';
 
 function AddGrandkidForm(item) {
-  return item.view === 'AddGrandkidForm';
+  return item instanceof AddGrandkidFormView;
 }
 
 AddGrandkidForm.description = 'Add grandkid form';

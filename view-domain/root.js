@@ -1,26 +1,30 @@
-const attachViewToDomain = require('./helpers/attach-view-to-domain');
+const ViewDomain = require('../models/view-domain');
 
-const defaultView = require('./views/default-view');
-const listOfGrandkids = require('./views/list-of-grandkids');
-const grandkidListItem = require('./views/grandkid-list-item');
-const addGrandkidForm = require('./views/add-grandkid-form');
+const DefaultView = require('./views/default-view');
+const ListOfGrandkids = require('./views/list-of-grandkids');
+const GrandkidListItem = require('./views/grandkid-list-item');
+const AddGrandkidForm = require('./views/add-grandkid-form');
+
+class AppViewDomain extends ViewDomain {
+  constructor(coreDomain) {
+    super();
+    this.coreDomain = coreDomain;
+  }
+  DefaultView(params) {
+    return this.render(new DefaultView(params));
+  }
+  ListOfGrandkids(params) {
+    return this.render(new ListOfGrandkids(params));
+  }
+  GrandkidListItem(params) {
+    return this.render(new GrandkidListItem(params));
+  }
+  AddGrandkidForm(params) {
+    return this.render(new AddGrandkidForm(params));
+  }
+}
 
 module.exports = function makeDomain(coreDomain) {
-  const storage = {};
-  const domain = {
-    core: coreDomain,
-    store: function (namespace, key, value) {
-      storage[`${namespace}::${key}`] = value;
-    },
-    get: function (namespace, key) {
-      return storage[`${namespace}::${key}`];
-    },
-  };
-
-  attachViewToDomain(domain, 'DefaultView', defaultView);
-  attachViewToDomain(domain, 'ListOfGrandkids', listOfGrandkids);
-  attachViewToDomain(domain, 'GrandkidListItem', grandkidListItem);
-  attachViewToDomain(domain, 'AddGrandkidForm', addGrandkidForm);
-
-  return domain;
+  return new AppViewDomain(coreDomain);
 }
+module.exports.AppViewDomain = AppViewDomain;

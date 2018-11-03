@@ -1,7 +1,7 @@
-module.exports = function grandkidListItem(args, domain) {
-  const grandkid = args[0];
-  return {
-    view: 'GrandkidListItem',
-    name: grandkid.Name(),
-  };
+const View = require('../../models/view');
+
+module.exports = class GrandkidListItem extends View {
+  name() {
+    return this.props.Name();
+  }
 }

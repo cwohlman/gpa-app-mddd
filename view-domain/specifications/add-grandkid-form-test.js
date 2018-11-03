@@ -20,7 +20,7 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
     ExpectToFindGrandkid(WithName(name));
   }
   function ExpectToFindGrandkid(finder) {
-    const list = domain.core.ViewAllGrandkids().grandkids;
+    const list = domain.coreDomain.ViewAllGrandkids().grandkids;
     if (! list) {
       throw new Error(`Expected a list of grandkids but none was provided.`);
     }
