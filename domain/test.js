@@ -1,5 +1,5 @@
 const ViewGrandkidsFeatureTest = require('./specifications/view-grandkids-feature-test');
-const makeDomain = require('./root');
+const makeDomain = require('./test-domain/root');
 
 module.exports = function test() {
   // uncomment to see how insanely fast these tests are :)

@@ -1,11 +1,17 @@
+/**
+ * @param makeDomain { import("../test-domain/root") }
+ */
 module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
+  /**
+   * @type { import("../test-domain/root").TestDomain }
+   */
   let domain;
   let world;
 
   scenario('Can view one grandkid', function () {
-    GivenOneGrandkidHasBeenAdded();
-    WhenIViewAllGrandkids();
-    ThenIShouldSeeOneGrandkid();
+    domain.GivenOneGrandkidHasBeenAdded();
+    domain.WhenIViewAllGrandkids();
+    domain.ThenIShouldSeeOneGrandkid();
   });
 
   scenario('Can view multiple grandkids', function () {

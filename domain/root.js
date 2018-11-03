@@ -23,3 +23,4 @@ class AppDomain extends Domain {
 module.exports = function makeDomain() {
   return new AppDomain();
 }
+module.exports.AppDomain = AppDomain;
