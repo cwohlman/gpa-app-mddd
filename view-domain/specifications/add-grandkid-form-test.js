@@ -8,6 +8,8 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
     WhenTheFormIsSubmitted();
 
     ThenAGrandkidShouldBeCreatedWithName('Maria');
+
+    AndTheFormShouldBeEmpty();
   });
 
   function GivenTheFollowingNameIsInputed(name) {
@@ -19,14 +21,22 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   function ThenAGrandkidShouldBeCreatedWithName(name) {
     ExpectToFindGrandkid(WithName(name));
   }
+  function AndTheFormShouldBeEmpty() {
+    ExpectViewNameToBeEmpty()
+  }
   function ExpectToFindGrandkid(finder) {
-    const list = domain.coreDomain.ViewAllGrandkids().grandkids;
+    const list = domain.query('ViewAllGrandkids').grandkids;
     if (! list) {
       throw new Error(`Expected a list of grandkids but none was provided.`);
     }
     if (! list.find(finder)) {
       console.log(list[0].Name());
       throw new Error(`Expected to find a grandkid ${finder.description} but none was found among the ${list.length} grandkids.`);
+    }
+  }
+  function ExpectViewNameToBeEmpty() {
+    if (world.view.currentName()) {
+      throw new Error(`Expected the name field to be empty but got ${world.view.currentName()} instead.`);
     }
   }
 

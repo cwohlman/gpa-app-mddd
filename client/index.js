@@ -2,16 +2,15 @@ const makeClient = require('./root');
 const makeViewDomain = require('../view-domain/root');
 const makeDomain = require('../domain/root');
 
-client = makeClient(makeViewDomain(makeDomain()));
+const { h, Component, render } = require('preact');
 
-client.onUpdate = rerender;
-
-function rerender() {
-  rootNode.innerHTML = client.render('/');
+class AppRoot extends Component {
+  componentWillMount() {
+    this.view = makeClient(makeDomain(), () => this.forceUpdate());
+  }
+  render() {
+    return this.view.root('/');
+  }
 }
 
-rootNode = document.createElement('div');
-
-document.body.append(rootNode);
-
-rerender();
+render(h(AppRoot), document.body);

@@ -11,10 +11,11 @@ const Module = require('module');
 const oldRequire = Module.prototype.require;
 const watcher = require('chokidar').watch([]).on('all', function (event, path) {
   if (event !== 'add') {
-    delete require.cache[path];
-    if (maps[path]) {
-      maps[path].forEach(p => delete require.cache[p]);
-    }
+    // delete require.cache[path];
+    // if (maps[path]) {
+    //   maps[path].forEach(p => delete require.cache[p]);
+    // }
+    Object.keys(require.cache).forEach(key => delete require.cache[key]);
     start();
   }
 });
@@ -42,7 +43,6 @@ Module.prototype.require = function (id) {
 }
 
 function start() {
-  maps = {};
   console.log('Starting...');
   try {
     performance.mark('Start');

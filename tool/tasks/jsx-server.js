@@ -5,7 +5,7 @@ const { performance } = require('perf_hooks');
 const watchFunction = require('../watch-function');
 
 module.exports = function () {
-  const watcher = require('chokidar').watch(['./view-domain/views']).on('all', function (event, path) {
+  const watcher = require('chokidar').watch(['./view-domain/views', './client/view.jsx']).on('all', function (event, path) {
     if (/\.jsx$/.test(path)) {
       const out = path.replace(/\.jsx$/, '-view.js');
       performance.mark('Start');

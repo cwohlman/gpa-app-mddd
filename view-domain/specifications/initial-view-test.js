@@ -16,9 +16,9 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   });
 
   function GivenThereAreThreeGrandkids() {
-    domain.coreDomain.AddGrandkid({ name: 'One' });
-    domain.coreDomain.AddGrandkid({ name: 'Two' });
-    domain.coreDomain.AddGrandkid({ name: 'Three' });
+    domain.execute('AddGrandkid', { name: 'One' });
+    domain.execute('AddGrandkid', { name: 'Two' });
+    domain.execute('AddGrandkid', { name: 'Three' });
   }
 
   function WhenTheDefaultViewIsPresented() {

@@ -2,7 +2,14 @@ const React = require('../react-shim');
 
 class ListOfGrandkidsView extends React.Component {
   render() {
-    return <div />;
+    const { model } = this.props;
+    return (
+      <div>
+        {
+          model.visibleChildren()
+        }
+      </div>
+    )
   }
 }
 

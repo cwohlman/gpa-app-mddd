@@ -8,7 +8,13 @@ const AddGrandkidForm = require('./views/add-grandkid-form');
 class AppViewDomain extends ViewDomain {
   constructor(coreDomain) {
     super();
-    this.coreDomain = coreDomain;
+    this._coreDomain = coreDomain;
+  }
+  query(name, props) {
+    return this._coreDomain[name](props);
+  }
+  execute(name, props) {
+    return this._coreDomain[name](props);
   }
   DefaultView(params) {
     return this.render(new DefaultView(params));
