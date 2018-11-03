@@ -1,20 +1,25 @@
-const attachQuery = require('./helpers/attach-query-to-domain');
-const attachCommand = require('./helpers/attach-command-to-domain');
-const attachSubdomain = require('./helpers/attach-subdomain-to-domain');
-const attachAggregate = require('./helpers/attach-aggregate-to-domain');
-const ViewAllGrandkids = require('./queries/view-all-grandkids')
-const AddGrandkid = require('./commands/add-grandkid')
-const Grandkid = require('./domains/grandkid')
-const Grandkids = require('./aggregates/grandkids')
+const Domain = require('../models/domain');
 
+const ViewAllGrandkidsQuery = require('./queries/view-all-grandkids')
+const AddGrandkidCommand = require('./commands/add-grandkid')
+const GrandkidSubdomain = require('./domains/grandkid')
+const GrandkidsAggregate = require('./aggregates/grandkids')
+
+class AppDomain extends Domain {
+  ViewAllGrandkids(props) {
+    return this.invoke(new ViewAllGrandkidsQuery(props));
+  }
+  AddGrandkid(props) {
+    return this.invoke(new AddGrandkidCommand(props));
+  }
+  Grandkid(props) {
+    return this.invoke(new GrandkidSubdomain(props));
+  }
+  Grandkids(props) {
+    return this.invoke(new GrandkidsAggregate(props));
+  }
+}
 
 module.exports = function makeDomain() {
-  const domain = { events: [] };
-
-  attachQuery(domain, 'ViewAllGrandkids', ViewAllGrandkids);
-  attachCommand(domain, 'AddGrandkid', AddGrandkid);
-  attachSubdomain(domain, 'Grandkid', Grandkid);
-  attachAggregate(domain, 'Grandkids', Grandkids);
-
-  return domain;
+  return new AppDomain();
 }

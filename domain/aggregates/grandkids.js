@@ -1,13 +1,17 @@
-module.exports = function Grandkids(aggregate, event, domain) {
-  aggregate = aggregate || [];
-  if (event.domain === 'grandkid') {
-    let subdomain = aggregate.find(kid => kid.id === event.id);
-    if (! subdomain) {
-      subdomain = domain.Grandkid();
-      subdomain.id = aggregate.length;
-      aggregate.push(subdomain);
+const Aggregate = require('../../models/aggregate');
+
+module.exports = class GrandkidsAggregate extends Aggregate {
+  reduce(accumulator, event, domain) {
+    if (! accumulator) {
+      accumulator = [];
     }
-    subdomain.events.push(event);
+
+    if (event.subdomain === 'grandkid') {
+      if (event.action === 'add') {
+        accumulator.push(domain.Grandkid(event.id));
+      }
+    }
+
+    return accumulator;
   }
-  return aggregate;
 }

@@ -12,7 +12,9 @@ const oldRequire = Module.prototype.require;
 const watcher = require('chokidar').watch([]).on('all', function (event, path) {
   if (event !== 'add') {
     delete require.cache[path];
-    maps[path].forEach(p => delete require.cache[p]);
+    if (maps[path]) {
+      maps[path].forEach(p => delete require.cache[p]);
+    }
     start();
   }
 });

@@ -70,7 +70,7 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
       throw new Error(`Expected a list of grandkids but none was provided.`);
     }
     if (! list.find(finder)) {
-      console.log(list[0].Name());
+      console.log(list[0]);
       throw new Error(`Expected to find a grandkid ${finder.description} but none was found among the ${list.length} grandkids.`);
     }
   }
@@ -78,6 +78,7 @@ module.exports = function ViewGrandkidsFeatureTest(makeDomain) {
   function WithName(name) {
     const finder = function FindWithName(item) {
       if (typeof item.Name !== 'function') {
+        console.log(item);
         throw new Error(`Expected item to have a name but it has none.`);
       }
       if (item.Name() === name) {

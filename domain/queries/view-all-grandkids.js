@@ -1,5 +1,9 @@
-module.exports = function viewAllGrandkids(args, domain) {
-  return {
-    grandkids: domain.Grandkids(),
-  };
+const Query = require('../../models/query');
+
+module.exports = class ViewAllGrandkidsQuery extends Query {
+  execute(domain) {
+    return {
+      grandkids: domain.Grandkids(),
+    };
+  }
 }
